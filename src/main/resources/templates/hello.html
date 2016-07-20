@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title sec:authentication="name"></title>
+</head>
+<body>
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+<form th:action="@{/logout}" method="post">
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <p th:text="admin"></p>
+    </div>
+    <div sec:authorize="hasRole('ROLE_USER')">
+        <p th:text="User"></p>
+    </div>
+    <input type="submit" value="注销"/>
+</form>
+</body>
+</html>
